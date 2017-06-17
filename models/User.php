@@ -5,9 +5,20 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $image;
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
 
     public static function tableName(){
-        return 'user';
+        return '{{%user}}';
     }
 
     public function rules()
@@ -35,6 +46,18 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'age'      => 'Возраст',
             'image'    => 'Фото',
         ];
+    }
+
+    public function upload(){
+        if($this->validate()){
+            $path = 'images/photo/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            $this->attachImage($path);
+            @unlink($path);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

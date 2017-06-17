@@ -8,6 +8,7 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -66,6 +67,7 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Служащий {$model->name} добавлен");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -85,6 +87,13 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if ($model->image){
+                $model->upload();
+            }
+            unset($model->image);
+            Yii::$app->session->setFlash('success', "Данные служащего {$model->surname} обновлены !");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

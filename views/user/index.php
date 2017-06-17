@@ -18,17 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         //'rowOptions' => ['style' => 'background-color:#778899;'],
-//        [
-//            'attribute'=>'image',
-//            'format' => 'image',
-//            'value' => function($data) {
-//                return 'data:image/jpeg;charset=utf-8;base64,' . base64_encode($data->image);
-//            },
-//        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -36,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'surname:ntext',
             'name:ntext',
             'middname:ntext',
-            'birth_date',
+            'birth_date:date',
             'age',
             [
                 'label' => 'Картинка',
@@ -44,11 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data){
                     return Html::img(Url::toRoute($data->image),[
                         'alt'=>'yii2 - картинка в gridview',
-                        'style' => 'width:15px;'
+                        'style' => 'width:115px;'
                     ]);
                 },
             ],
-            'last_modified',
+            'last_modified:date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

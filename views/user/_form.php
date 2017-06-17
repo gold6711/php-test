@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
 
@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'age')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
     <?= $form->field($model, 'last_modified')->textInput() ?>
 
