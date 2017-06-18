@@ -67,6 +67,11 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->image = UploadedFile::getInstance($model, 'image');
+            if ($model->image){
+                $model->upload();
+            }
+            unset($model->image);
             Yii::$app->session->setFlash('success', "Служащий {$model->name} добавлен");
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
