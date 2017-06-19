@@ -2,6 +2,7 @@
 
 namespace app\models;
 use yii\db\ActiveRecord;
+use rico\yii2images\models\Image;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -60,7 +61,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         }
     }
 
+    public function getPath() {
+        return $this->hasOne(Image::className(), ['filePath' => 'id']);
+    }
 
+/*************************************************************************************************************************/
+/*************************************************************************************************************************/
     /**
      * @inheritdoc
      */

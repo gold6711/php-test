@@ -3,9 +3,12 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use rico\yii2images\models\Image;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model app\models\User */
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -19,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+<!--    --><?php //$image = $model->getImage();?>
+    <?php debug($img);?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

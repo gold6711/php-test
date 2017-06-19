@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use rico\yii2images\models\Image;
 /**
  * UserController implements the CRUD actions for User model.
  */
@@ -42,6 +42,8 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'img' => $this->findImg(),
+
         ]);
     }
 
@@ -133,6 +135,13 @@ class UserController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function findImg()
+    {
+        $img = Image::find()->all(); {
+            return $img;
         }
     }
 }
